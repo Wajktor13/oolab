@@ -6,6 +6,5 @@ enum Direction {
     BACKWARD,
     RIGHT,
     LEFT,
-
     UNDEFINED
 }
