@@ -3,6 +3,10 @@ import static java.lang.System.out;
 
 
 public class World {
+    public class Vector2D{
+        public int x;
+        public int y;
+    }
 
     public static void main(String[] args){
         out.println("system wystartował");
