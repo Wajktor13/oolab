@@ -3,20 +3,23 @@ import static java.lang.System.out;
 
 
 public class World {
-    public class Vector2D{
-        public int x;
-        public int y;
-    }
-
     public static void main(String[] args){
         out.println("system wystartował");
 
         Direction[] convertedCommands = convert(args);
         run(convertedCommands);
 
+        Vector2d position1 = new Vector2d(1,2);
+        out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        out.println(position2);
+        out.println(position1.add(position2));
+
+        MapDirection direction1 = MapDirection.NORTH;
+        out.println(direction1.toUnitVector());
+
         out.println("system zakończył działanie");
     }
-
 
     public static Direction[] convert(String[] commands){
         int n = commands.length;
@@ -37,7 +40,6 @@ public class World {
 
         return convertedCommands;
     }
-
 
     public static void run(Direction[] commands) {
         for (Direction command : commands) {
