@@ -10,13 +10,15 @@ public class World {
         run(convertedCommands);
 
         Vector2d position1 = new Vector2d(1,2);
-        out.println(position1);
+        System.out.println(position1);
         Vector2d position2 = new Vector2d(-2,1);
-        out.println(position2);
-        out.println(position1.add(position2));
-
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
         MapDirection direction1 = MapDirection.NORTH;
+        out.println(direction1);
         out.println(direction1.toUnitVector());
+        out.println(direction1.next());
+        out.println(direction1.previous());
 
         out.println("system zakończył działanie");
     }

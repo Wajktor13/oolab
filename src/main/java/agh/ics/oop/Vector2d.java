@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Objects;
+
 public class Vector2d {
     final int x, y;
 
@@ -54,10 +56,7 @@ public class Vector2d {
     }
 
     public int hashCode(){
-        double m = Math.pow(2, 64);
-        double k = Math.pow(Math.abs(this.x) + 64, Math.abs(this.y) + 64);
-        double a = (Math.sqrt(5) - 1) / 2;
 
-        return (int) ((Math.floor( m * (k * (a % 1)))) % 2147483647);
+        return Objects.hash(this.x, this.y);
     }
 }
