@@ -1,41 +1,28 @@
 package agh.ics.oop;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import static java.lang.System.out;
 
 
 public class World {
     public static void main(String[] args){
+//        ./gradlew.bat run --args="f l x backward e r"
+
+        out.println("system has started\n");
+
         Animal newAnimal = new Animal();
+        OptionParser op = new OptionParser();
+
+        MoveDirection[] commands = op.parse(args);
+
+        for (MoveDirection command : commands){
+            newAnimal.move(command);
+        }
+
+        out.println(Arrays.toString(commands));
         out.println(newAnimal);
-    }
 
-    public static Direction[] convert(String[] commands){
-        int n = commands.length;
-        int i = 0;
-        Direction[] convertedCommands = new Direction[n];
-
-        for (String command : commands){
-            convertedCommands[i] = switch (command) {
-                case "f" -> Direction.FORWARD;
-                case "b" -> Direction.BACKWARD;
-                case "r" -> Direction.RIGHT;
-                case "l" -> Direction.LEFT;
-                default -> Direction.UNDEFINED;
-            };
-
-            i++;
-        }
-
-        return convertedCommands;
-    }
-
-    public static void run(Direction[] commands) {
-        for (Direction command : commands) {
-            switch (command) {
-                case FORWARD -> out.println("zwierzak idzie do przodu");
-                case BACKWARD -> out.println("zwierzak idzie do tyłu");
-                case RIGHT -> out.println("zwierzak skręca w prawo");
-                case LEFT -> out.println("zwierzak skręca w lewo");
-            }
-        }
+        out.println("\nsystem has stopped");
     }
 }
