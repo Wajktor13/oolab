@@ -1,8 +1,8 @@
 package agh.ics.oop;
 
 public class Animal {
-    private MapDirection direction = MapDirection.NORTH;
-    private Vector2d position = new Vector2d(2, 2);
+    public MapDirection direction = MapDirection.NORTH;
+    public Vector2d position = new Vector2d(2, 2);
 
     public String toString(){
         return "Position: " + position + "\nDirection: " + direction;
