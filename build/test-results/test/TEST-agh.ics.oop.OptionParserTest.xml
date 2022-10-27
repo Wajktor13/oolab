@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.OptionParserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-27T10:39:04" hostname="DESKTOP-GL64FRM" time="0.029">
+  <properties/>
+  <testcase name="parseOutput()" classname="agh.ics.oop.OptionParserTest" time="0.029"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

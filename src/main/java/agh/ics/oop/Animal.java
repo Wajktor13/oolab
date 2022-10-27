@@ -1,8 +1,9 @@
 package agh.ics.oop;
 
 public class Animal {
-    public MapDirection direction = MapDirection.NORTH;
-    public Vector2d position = new Vector2d(2, 2);
+    private MapDirection direction = MapDirection.NORTH;
+    private Vector2d position = new Vector2d(2, 2);
+    private final int[][] corners = {{0, 0}, {4, 4}};
 
     public String toString(){
         return "Position: " + position + "\nDirection: " + direction;
@@ -22,13 +23,17 @@ public class Animal {
             case BACKWARD -> newPosition = this.position.subtract(direction.toUnitVector());
         }
 
-        if ((new Vector2d(0, 0)).precedes(newPosition) && (new Vector2d(4, 4)).follows(newPosition)){
+        if ((new Vector2d(corners[0][0], corners[0][1])).precedes(newPosition) &&
+                (new Vector2d(corners[1][0], corners[1][1])).follows(newPosition)){
             this.position = newPosition;
         }
     }
 
-    public static void main(String[] args) {
-        Animal nww = new Animal();
-        nww.move(MoveDirection.BACKWARD);
+    public MapDirection getDirection(){
+        return this.direction;
+    }
+
+    public Vector2d getPosition(){
+        return this.position;
     }
 }
