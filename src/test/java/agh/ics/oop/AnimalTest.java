@@ -1,15 +1,20 @@
 package agh.ics.oop;
 
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class AnimalTest {
+    private Animal testAnimal;
+
+    @BeforeEach
+    void setup(){
+
+        testAnimal = new Animal(new RectangularMap(5, 5), new Vector2d(2, 2));
+    }
 
     @Test
     void moveDirection(){
-        Animal testAnimal = new Animal();
 
         MoveDirection[] moveDir = new MoveDirection[] {MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.BACKWARD,
                 MoveDirection.RIGHT, MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.RIGHT,
@@ -29,7 +34,6 @@ public class AnimalTest {
 
     @Test
     void movePosition(){
-        Animal testAnimal = new Animal();
 
         MoveDirection[] moveDir = new MoveDirection[] {MoveDirection.FORWARD, MoveDirection.FORWARD,
                 MoveDirection.FORWARD, MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.FORWARD,
@@ -51,7 +55,6 @@ public class AnimalTest {
 
     @Test
     void moveStaysOnMap(){
-        Animal testAnimal = new Animal();
         final int[][] corners = {{0, 0}, {4, 4}};
         int n = 8;
 

@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-public class OptionParser {
+public class OptionsParser {
 
     public MoveDirection[] parse(String[] commands) {
         int n = commands.length;
@@ -22,7 +22,7 @@ public class OptionParser {
                 case "backward", "b" -> convertedCommands[i++] = MoveDirection.BACKWARD;
                 case "right", "r" -> convertedCommands[i++] = MoveDirection.RIGHT;
                 case "left", "l" -> convertedCommands[i++] = MoveDirection.LEFT;
-            };
+            }
         }
 
         return convertedCommands;
