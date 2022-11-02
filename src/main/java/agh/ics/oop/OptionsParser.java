@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 public class OptionParser {
+
     public MoveDirection[] parse(String[] commands) {
         int n = commands.length;
         int countUndefined = 0;
