@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.RectangularMapTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-03T15:13:10" hostname="DESKTOP-HHSEM5B" time="0.024">
+  <properties/>
+  <testcase name="isOccupiedAndPlace()" classname="agh.ics.oop.RectangularMapTest" time="0.016"/>
+  <testcase name="canMoveToAndPlace()" classname="agh.ics.oop.RectangularMapTest" time="0.001"/>
+  <testcase name="objectAtAndPlace()" classname="agh.ics.oop.RectangularMapTest" time="0.005"/>
+  <testcase name="isValid()" classname="agh.ics.oop.RectangularMapTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
