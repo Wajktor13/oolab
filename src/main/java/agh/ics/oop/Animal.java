@@ -6,6 +6,10 @@ public class Animal {
     private Vector2d position;
     private final IWorldMap map;
 
+    public Animal(IWorldMap map){
+        this.map = map;
+    }
+
     public Animal(IWorldMap map, Vector2d initialPosition){
         this.map = map;
         this.position = initialPosition;
@@ -30,7 +34,7 @@ public class Animal {
             case BACKWARD -> newPosition = this.position.subtract(direction.toUnitVector());
         }
 
-        if (map.canMoveTo(newPosition)){
+        if (newPosition != this.position && map.canMoveTo(newPosition)){
             this.position = newPosition;
         }
     }

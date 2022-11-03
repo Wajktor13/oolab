@@ -34,14 +34,14 @@ public class RectangularMap implements IWorldMap{
             return objectAt(position) != null;
         }
 
-        return false; // error?
+        return false;
     }
 
     @Override
     public Object objectAt(Vector2d position){
         if(isValid(position)){
             for (Animal animal : animalsList){
-                if (position.equals(animal.getPosition())){
+                if (animal.isAt(position)){
 
                     return animal;
                 }
