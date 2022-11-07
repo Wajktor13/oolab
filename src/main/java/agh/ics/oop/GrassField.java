@@ -3,13 +3,12 @@ package agh.ics.oop;
 import java.util.ArrayList;
 
 
-public class GrassField implements IWorldMap{
-    private int numberOfGrass;
+public class GrassField extends AbstractWorldMap{
+    private final int numberOfGrass;
     private final Vector2d grassLeftBottomCorner = new Vector2d(0, 0);
     private final Vector2d grassRightUpperCorner;
     private final Vector2d animalLeftBottomCorner = new Vector2d(0, 0);
     private final Vector2d animalRightUpperCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-    private final ArrayList<Animal> animalsList = new ArrayList<>();
     private final ArrayList<Grass> grassList = new ArrayList<>();
 
     public GrassField(int numberOfGrass){
@@ -20,16 +19,7 @@ public class GrassField implements IWorldMap{
         placeGrass();
     }
 
-    @Override
-    public String toString() {
-        MapVisualizer mapVisualizer = new MapVisualizer(this);
-
-        Vector2d[] corners = findMinOccupiedMapCorners();
-
-        return  mapVisualizer.draw(corners[0], corners[1]);
-    }
-
-    private Vector2d[] findMinOccupiedMapCorners(){
+    protected Vector2d[] findMinOccupiedMapCorners(){
 
         if (animalsList.isEmpty()){
             return new Vector2d[] {new Vector2d(0, 0), new Vector2d(0, 0)};
@@ -79,22 +69,8 @@ public class GrassField implements IWorldMap{
 
     }
 
-    public boolean isValid(Vector2d position){
+    protected boolean isValid(Vector2d position){
         return animalLeftBottomCorner.precedes(position) && animalRightUpperCorner.follows(position);
-    }
-
-    @Override
-    public boolean canMoveTo(Vector2d position){
-        return isValid(position) && !isOccupied(position);
-    }
-
-    @Override
-    public boolean isOccupied(Vector2d position){
-        if(isValid(position)){
-            return objectAt(position) instanceof Animal;
-        }
-
-        return false;
     }
 
     @Override
@@ -116,19 +92,5 @@ public class GrassField implements IWorldMap{
         }
 
         return null;
-    }
-
-    @Override
-    public boolean place(Animal animal){
-        Vector2d position = animal.getPosition();
-        if (!canMoveTo(position)){
-
-            return false;
-        }
-        else {
-            animalsList.add(animal);
-
-            return true;
-        }
     }
 }
