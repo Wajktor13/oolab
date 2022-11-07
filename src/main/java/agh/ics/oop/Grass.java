@@ -15,4 +15,8 @@ public class Grass {
     public String toString(){
         return "*";
     }
+
+    public boolean isAt(Vector2d otherPosition){
+        return this.position.equals(otherPosition);
+    }
 }

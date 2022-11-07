@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SimulationEngineTest {
 
     @Test
-    void creatingAndPlacingAnimals(){
+    void rectangularMapCreatingAndPlacingAnimals(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
         RectangularMap map = new RectangularMap(3, 3);
@@ -25,7 +25,7 @@ public class SimulationEngineTest {
     }
 
     @Test
-    void movingAnimals1(){
+    void rectangularMapMovingAnimals1(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
         RectangularMap map = new RectangularMap(3, 3);
@@ -45,7 +45,7 @@ public class SimulationEngineTest {
     }
 
     @Test
-    void movingAnimals2(){
+    void rectangularMapMovingAnimals2(){
         OptionsParser op = new OptionsParser();
         MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "x", "f", "r", "r", "f", "f", "f",
                                                       "f", "f", "f","y", "f", "f"});
@@ -70,5 +70,49 @@ public class SimulationEngineTest {
                 }
             }
         }
+    }
+
+    @Test
+    void grassFieldCreatingAndPlacingAnimals(){
+        MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
+        Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
+        GrassField map = new GrassField(303);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+
+        assertTrue(map.isOccupied(new Vector2d(1, 2)));
+        assertTrue(map.isOccupied(new Vector2d(2, 2)));
+        assertTrue(map.isOccupied(new Vector2d(2, 0)));
+    }
+
+    @Test
+    void grassFieldMovingAnimals1(){
+        MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
+        Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
+        GrassField map = new GrassField(11);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+
+        engine.run();
+
+        assertTrue(map.isOccupied(new Vector2d(1, 2)));
+        assertTrue(map.isOccupied(new Vector2d(2, 0)));
+        assertTrue(map.isOccupied(new Vector2d(1, 1)));
+    }
+
+    @Test
+    void grassFieldMovingAnimals2(){
+        OptionsParser op = new OptionsParser();
+        MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "x", "f", "r", "r", "f", "f", "f",
+                "f", "f", "f","y", "f", "f"});
+        Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
+        GrassField map = new GrassField(19);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+
+        engine.run();
+
+        assertTrue(map.isOccupied(new Vector2d(2, 0)));
+        assertTrue(map.isOccupied(new Vector2d(3, 7)));
+        assertEquals(((Animal)map.objectAt(new Vector2d(2, 0))).getDirection(), MapDirection.SOUTH);
+        assertEquals(((Animal)map.objectAt(new Vector2d(3, 7))).getDirection(), MapDirection.NORTH);
+
     }
 }

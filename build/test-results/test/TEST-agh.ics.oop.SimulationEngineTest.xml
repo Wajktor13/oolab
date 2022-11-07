@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.oop.SimulationEngineTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-11-03T11:40:29" hostname="DESKTOP-GL64FRM" time="0.046">
+<testsuite name="agh.ics.oop.SimulationEngineTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-11-07T13:59:03" hostname="DESKTOP-HHSEM5B" time="0.025">
   <properties/>
-  <testcase name="creatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.042"/>
-  <testcase name="movingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.003"/>
+  <testcase name="rectangularMapCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.015"/>
+  <testcase name="grassFieldCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.003"/>
+  <testcase name="rectangularMapMovingAnimals1()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
+  <testcase name="rectangularMapMovingAnimals2()" classname="agh.ics.oop.SimulationEngineTest" time="0.002"/>
+  <testcase name="grassFieldMovingAnimals1()" classname="agh.ics.oop.SimulationEngineTest" time="0.0"/>
+  <testcase name="grassFieldMovingAnimals2()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
