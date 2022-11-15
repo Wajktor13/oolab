@@ -21,11 +21,9 @@ public class RectangularMap extends AbstractWorldMap{
     @Override
     public Object objectAt(Vector2d position){
         if(isValid(position)){
-            for (Animal animal : animalsList){
-                if (animal.isAt(position)){
+            if (animalsHashMap.get(position) != null){
 
-                    return animal;
-                }
+                return animalsHashMap.get(position);
             }
         }
 

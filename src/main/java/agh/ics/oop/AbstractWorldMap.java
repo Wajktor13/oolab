@@ -1,9 +1,11 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-abstract class AbstractWorldMap implements IWorldMap{
-    protected final ArrayList<Animal> animalsList = new ArrayList<>();
+
+abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
+    protected final Map<Vector2d, Animal> animalsHashMap = new HashMap<>();
 
 
     protected abstract Vector2d[] findMinOccupiedMapCorners();
@@ -12,6 +14,13 @@ abstract class AbstractWorldMap implements IWorldMap{
 
     @Override
     public abstract Object objectAt(Vector2d position);
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+        Animal animal = animalsHashMap.get(oldPosition);
+        animalsHashMap.remove(oldPosition);
+        animalsHashMap.put(newPosition, animal);
+    }
 
     @Override
     public String toString(){
@@ -44,7 +53,7 @@ abstract class AbstractWorldMap implements IWorldMap{
             return false;
         }
         else {
-            animalsList.add(animal);
+            animalsHashMap.put(animal.position, animal);
 
             return true;
         }

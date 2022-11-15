@@ -1,6 +1,8 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GrassField extends AbstractWorldMap{
@@ -9,7 +11,7 @@ public class GrassField extends AbstractWorldMap{
     private final Vector2d grassRightUpperCorner;
     private final Vector2d animalLeftBottomCorner = new Vector2d(0, 0);
     private final Vector2d animalRightUpperCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-    private final ArrayList<Grass> grassList = new ArrayList<>();
+    private final Map<Vector2d, Grass> grassHashMap = new HashMap<>();
 
     public GrassField(int numberOfGrass){
         this.numberOfGrass = numberOfGrass;
@@ -21,7 +23,7 @@ public class GrassField extends AbstractWorldMap{
 
     protected Vector2d[] findMinOccupiedMapCorners(){
 
-        if (animalsList.isEmpty()){
+        if (animalsHashMap.isEmpty()){
             return new Vector2d[] {new Vector2d(0, 0), new Vector2d(0, 0)};
         }
 
@@ -29,14 +31,14 @@ public class GrassField extends AbstractWorldMap{
             int lowestX = animalRightUpperCorner.x, highestX = animalLeftBottomCorner.x;
             int lowestY = animalRightUpperCorner.y, highestY = animalLeftBottomCorner.y;
 
-            for (Animal animal : this.animalsList) {
+            for (Animal animal : this.animalsHashMap.values()) {
                 lowestX = Math.min(lowestX, animal.getPosition().x);
                 highestX = Math.max(highestX, animal.getPosition().x);
                 lowestY = Math.min(lowestY, animal.getPosition().y);
                 highestY = Math.max(highestY, animal.getPosition().y);
             }
 
-            for (Grass grass : this.grassList) {
+            for (Grass grass : this.grassHashMap.values()) {
                 lowestX = Math.min(lowestX, grass.getPosition().x);
                 highestX = Math.max(highestX, grass.getPosition().x);
                 lowestY = Math.min(lowestY, grass.getPosition().y);
@@ -62,7 +64,7 @@ public class GrassField extends AbstractWorldMap{
         for (int i = 0; i < this.numberOfGrass; i++){
             int randomInt = (int) (Math.random() * (n));
 
-            grassList.add(new Grass(availablePositions.get(randomInt)));
+            grassHashMap.put(availablePositions.get(randomInt), new Grass(availablePositions.get(randomInt)));
             availablePositions.remove(randomInt);
             n -= 1;
         }
@@ -76,19 +78,14 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public Object objectAt(Vector2d position){
         if(isValid(position)){
-            for (Animal animal : animalsList){
-                if (animal.isAt(position)){
-
-                    return animal;
-                }
+            if (animalsHashMap.get(position) != null){
+                return animalsHashMap.get(position);
             }
 
-            for (Grass grass : grassList) {
-                if (grass.isAt(position)) {
-
-                    return grass;
-                }
+            if (grassHashMap.get(position) != null){
+                return grassHashMap.get(position);
             }
+
         }
 
         return null;

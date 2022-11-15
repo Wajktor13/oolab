@@ -12,6 +12,7 @@ public class SimulationEngine implements IEngine{
         this.moves = moves;
         this.map = map;
 
+
         for (Vector2d position : initialPositions){
             createAnimal(position);
         }
