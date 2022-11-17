@@ -3,7 +3,7 @@ package agh.ics.oop;
 public interface IPositionChangeObserver {
 
     /**
-     * Removes value with oldPosition keys and adds the same value with
+     * Removes value with oldPosition key and adds the same value with
      * newPosition key
      *
      * @param oldPosition

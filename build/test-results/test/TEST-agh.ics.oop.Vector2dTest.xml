@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.Vector2dTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2022-11-17T08:33:25" hostname="DESKTOP-HHSEM5B" time="0.036">
+  <properties/>
+  <testcase name="subtractOther1()" classname="agh.ics.oop.Vector2dTest" time="0.014"/>
+  <testcase name="subtractOther2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="upperRightSelf()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="opposite1()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="opposite2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="equalsOther1()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="equalsOther2()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="addSelf()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="precedesSelf()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="equalsOtherWrongClass()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="addOther1()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="addOther2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="lowerLeftOther1()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="lowerLeftOther2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="lowerLeftSelf()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="upperRightOther1()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="upperRightOther2()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="equalsSelf()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="followsOther1()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="followsOther2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="toString1()" classname="agh.ics.oop.Vector2dTest" time="0.003"/>
+  <testcase name="toString2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="subtractSelf()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <testcase name="precedesOther1()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="precedesOther2()" classname="agh.ics.oop.Vector2dTest" time="0.0"/>
+  <testcase name="followsSelf()" classname="agh.ics.oop.Vector2dTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

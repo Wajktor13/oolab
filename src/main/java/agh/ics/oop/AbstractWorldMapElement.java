@@ -1,8 +1,7 @@
 package agh.ics.oop;
 
-import java.util.Objects;
 
-abstract class AbstractWorldMapElement {
+abstract class AbstractWorldMapElement{
     protected Vector2d position;
 
     public abstract String toString();
@@ -17,6 +16,6 @@ abstract class AbstractWorldMapElement {
 
     @Override
     public int hashCode() {
-        return  Objects.hash(this.position.x, this.position.y);
+        return position.hashCode();
     }
 }
