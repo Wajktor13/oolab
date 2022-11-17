@@ -13,9 +13,4 @@ abstract class AbstractWorldMapElement{
     public boolean isAt(Vector2d otherPosition){
         return this.position.equals(otherPosition);
     }
-
-    @Override
-    public int hashCode() {
-        return position.hashCode();
-    }
 }
