@@ -7,11 +7,12 @@ public class SimulationEngine implements IEngine{
     private final MoveDirection[] moves;
     private final IWorldMap map;
     private final ArrayList<Animal> animalsList = new ArrayList<>();
+    private final MapBoundary boundary;
 
-    public SimulationEngine(MoveDirection[] moves, IWorldMap map, Vector2d[] initialPositions){
+    public SimulationEngine(MoveDirection[] moves, IWorldMap map, Vector2d[] initialPositions, MapBoundary boundary){
         this.moves = moves;
         this.map = map;
-
+        this.boundary = boundary;
 
         for (Vector2d position : initialPositions){
             createAnimal(position);
@@ -19,9 +20,10 @@ public class SimulationEngine implements IEngine{
     }
 
     private void createAnimal(Vector2d position){
-        Animal newAnimal = new Animal(map, position);
+        Animal newAnimal = new Animal(map, position, boundary);
         animalsList.add(newAnimal);
         map.place(newAnimal);
+        boundary.addAwme(newAnimal);
     }
 
     @Override

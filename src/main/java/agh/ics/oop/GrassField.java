@@ -12,42 +12,19 @@ public class GrassField extends AbstractWorldMap{
     private final Vector2d animalLeftBottomCorner = new Vector2d(0, 0);
     private final Vector2d animalRightUpperCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
     private final Map<Vector2d, Grass> grassHashMap = new HashMap<>();
+    private final MapBoundary boundary;
 
-    public GrassField(int numberOfGrass){
+    public GrassField(int numberOfGrass, MapBoundary boundary){
         this.numberOfGrass = numberOfGrass;
         this.grassRightUpperCorner = new Vector2d((int)Math.sqrt(numberOfGrass * 10),
                                                   (int)Math.sqrt(numberOfGrass * 10));
+        this.boundary = boundary;
 
         placeGrass();
     }
 
     protected Vector2d[] findMinOccupiedMapCorners(){
-
-        if (animalsHashMap.isEmpty()){
-            return new Vector2d[] {new Vector2d(0, 0), new Vector2d(0, 0)};
-        }
-
-        else {
-            int lowestX = animalRightUpperCorner.x, highestX = animalLeftBottomCorner.x;
-            int lowestY = animalRightUpperCorner.y, highestY = animalLeftBottomCorner.y;
-
-            for (Animal animal : this.animalsHashMap.values()) {
-                lowestX = Math.min(lowestX, animal.getPosition().x);
-                highestX = Math.max(highestX, animal.getPosition().x);
-                lowestY = Math.min(lowestY, animal.getPosition().y);
-                highestY = Math.max(highestY, animal.getPosition().y);
-            }
-
-            for (Grass grass : this.grassHashMap.values()) {
-                lowestX = Math.min(lowestX, grass.getPosition().x);
-                highestX = Math.max(highestX, grass.getPosition().x);
-                lowestY = Math.min(lowestY, grass.getPosition().y);
-                highestY = Math.max(highestY, grass.getPosition().y);
-            }
-
-            return new Vector2d[] {new Vector2d(lowestX, lowestY), new Vector2d(highestX, highestY)};
-        }
-
+            return new Vector2d[] {boundary.getLowerLeftCorner(), boundary.getUpperRightCorner()};
     }
 
     private void placeGrass(){
@@ -63,8 +40,9 @@ public class GrassField extends AbstractWorldMap{
 
         for (int i = 0; i < this.numberOfGrass; i++){
             int randomInt = (int) (Math.random() * (n));
-
-            grassHashMap.put(availablePositions.get(randomInt), new Grass(availablePositions.get(randomInt)));
+            Vector2d grassPosition = availablePositions.get(randomInt);
+            grassHashMap.put(grassPosition, new Grass(grassPosition));
+            boundary.addAwme(grassHashMap.get(grassPosition));
             availablePositions.remove(randomInt);
             n -= 1;
         }

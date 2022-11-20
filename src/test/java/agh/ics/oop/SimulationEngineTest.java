@@ -5,13 +5,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SimulationEngineTest {
+    private MapBoundary boundary;
+
+    @BeforeEach
+    void setup(){
+        this.boundary = new MapBoundary();
+    }
 
     @Test
     void rectangularMapCreatingAndPlacingAnimals(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
-        RectangularMap map = new RectangularMap(3, 3);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        RectangularMap map = new RectangularMap(3, 3, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         assertTrue(map.isOccupied(new Vector2d(1, 2)));
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
@@ -28,8 +34,8 @@ public class SimulationEngineTest {
     void rectangularMapMovingAnimals1(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
-        RectangularMap map = new RectangularMap(3, 3);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        RectangularMap map = new RectangularMap(3, 3, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         engine.run();
 
@@ -50,8 +56,8 @@ public class SimulationEngineTest {
         MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
                                                       "f", "f", "f", "f", "f"});
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
-        RectangularMap map = new RectangularMap(10, 5);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        RectangularMap map = new RectangularMap(10, 5, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         engine.run();
 
@@ -78,10 +84,10 @@ public class SimulationEngineTest {
         MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
                 "f", "f", "f", "f", "f"});
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(2, 3), new Vector2d(2, 2)};
-        RectangularMap map = new RectangularMap(10, 5);
+        RectangularMap map = new RectangularMap(10, 5, boundary);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
         });
     }
 
@@ -89,8 +95,8 @@ public class SimulationEngineTest {
     void grassFieldCreatingAndPlacingAnimals(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
-        GrassField map = new GrassField(303);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        GrassField map = new GrassField(303, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         assertTrue(map.isOccupied(new Vector2d(1, 2)));
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
@@ -101,8 +107,8 @@ public class SimulationEngineTest {
     void grassFieldMovingAnimals1(){
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
-        GrassField map = new GrassField(11);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        GrassField map = new GrassField(11, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         engine.run();
 
@@ -117,8 +123,8 @@ public class SimulationEngineTest {
         MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
                 "f", "f", "f", "f", "f"});
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
-        GrassField map = new GrassField(19);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+        GrassField map = new GrassField(19, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
 
         engine.run();
 
@@ -135,10 +141,10 @@ public class SimulationEngineTest {
         MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
                 "f", "f", "f", "f", "f"});
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(2, 3), new Vector2d(2, 2)};
-        GrassField map = new GrassField(10);
+        GrassField map = new GrassField(10, boundary);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions);
+            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
         });
     }
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     protected final Map<Vector2d, Animal> animalsHashMap = new HashMap<>();
 
-
     protected abstract Vector2d[] findMinOccupiedMapCorners();
 
     protected abstract boolean isValid(Vector2d position);

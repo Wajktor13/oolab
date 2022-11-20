@@ -1,15 +1,21 @@
 package agh.ics.oop;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionsParserTest {
+    private OptionsParser op;
+
+    @BeforeEach
+    void setup(){
+        this.op = new OptionsParser();
+    }
 
     @Test
     void parseOutputLegalCommands(){
-        OptionsParser op = new OptionsParser();
-
         assertArrayEquals((new MoveDirection[]{MoveDirection.RIGHT, MoveDirection.LEFT, MoveDirection.FORWARD}),
                            op.parse(new String[]{"r", "left", "f"}));
 
@@ -25,8 +31,6 @@ public class OptionsParserTest {
 
     @Test
     void parseOutputIllegalCommands(){
-        OptionsParser op = new OptionsParser();
-
         assertThrows(IllegalArgumentException.class, () -> {
             op.parse(new String[]{"r", "x", "backward"});
         });

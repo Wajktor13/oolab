@@ -13,9 +13,10 @@ public class World {
             out.println("system has started\n");
 
             MoveDirection[] directions = new OptionsParser().parse(args);
-            IWorldMap map = new GrassField(10);
-            Vector2d[] positions = { new Vector2d(2,1), new Vector2d(2,2) };
-            IEngine engine = new SimulationEngine(directions, map, positions);
+            MapBoundary boundary = new MapBoundary();
+            IWorldMap map = new GrassField(10, boundary);
+            Vector2d[] positions = { new Vector2d(0,3), new Vector2d(6,8) };
+            IEngine engine = new SimulationEngine(directions, map, positions, boundary);
             engine.run();
             out.println(map);
 

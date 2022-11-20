@@ -1,17 +1,24 @@
 package agh.ics.oop;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GrassFieldTest {
+    private MapBoundary boundary;
+
+    @BeforeEach
+    void setup(){
+        this.boundary = new MapBoundary();
+    }
 
     @Test
     void canMoveToAndPlace(){
-        GrassField map = new GrassField(10);
-        map.place(new Animal(map, new Vector2d(0, 3)));
-        map.place(new Animal(map, new Vector2d(4, 1)));
+        GrassField map = new GrassField(10, boundary);
+        map.place(new Animal(map, new Vector2d(0, 3), boundary));
+        map.place(new Animal(map, new Vector2d(4, 1), boundary));
 
         assertTrue(map.canMoveTo(new Vector2d(0, 0)));
         assertTrue(map.canMoveTo(new Vector2d(4, 2)));
@@ -20,9 +27,9 @@ public class GrassFieldTest {
         assertFalse(map.canMoveTo(new Vector2d(-2, 12)));
 
 
-        map = new GrassField(222);
-        map.place(new Animal(map, new Vector2d(15, 8)));
-        map.place(new Animal(map, new Vector2d(9, 2)));
+        map = new GrassField(222, boundary);
+        map.place(new Animal(map, new Vector2d(15, 8), boundary));
+        map.place(new Animal(map, new Vector2d(9, 2), boundary));
 
         assertTrue(map.canMoveTo(new Vector2d(1, 12)));
         assertTrue(map.canMoveTo(new Vector2d(8, 7)));
@@ -33,9 +40,9 @@ public class GrassFieldTest {
 
     @Test
     void isOccupiedAndPlace(){
-        GrassField map = new GrassField(11);
-        map.place(new Animal(map, new Vector2d(2, 3)));
-        map.place(new Animal(map, new Vector2d(4, 14)));
+        GrassField map = new GrassField(11, boundary);
+        map.place(new Animal(map, new Vector2d(2, 3), boundary));
+        map.place(new Animal(map, new Vector2d(4, 14), boundary));
 
         assertTrue(map.isOccupied(new Vector2d(2, 3)));
         assertTrue(map.isOccupied(new Vector2d(4, 14)));
@@ -45,9 +52,9 @@ public class GrassFieldTest {
         assertFalse(map.isOccupied(new Vector2d(-1, 8)));
 
 
-        map = new GrassField(153);
-        map.place(new Animal(map, new Vector2d(8, 9)));
-        map.place(new Animal(map, new Vector2d(1, 7)));
+        map = new GrassField(153, boundary);
+        map.place(new Animal(map, new Vector2d(8, 9), boundary));
+        map.place(new Animal(map, new Vector2d(1, 7), boundary));
 
         assertTrue(map.isOccupied(new Vector2d(8, 9)));
         assertTrue(map.isOccupied(new Vector2d(1, 7)));
@@ -59,10 +66,10 @@ public class GrassFieldTest {
 
     @Test
     void objectAtAndPlace(){
-        GrassField map = new GrassField(33);
-        Animal animal1 = new Animal(map, new Vector2d(12, 100));
+        GrassField map = new GrassField(33, boundary);
+        Animal animal1 = new Animal(map, new Vector2d(12, 100), boundary);
         map.place(animal1);
-        Animal animal2 = new Animal(map, new Vector2d(2, 0));
+        Animal animal2 = new Animal(map, new Vector2d(2, 0), boundary);
         map.place(animal2);
 
         assertEquals((Animal) map.objectAt(new Vector2d(12, 100)), animal1);
@@ -71,10 +78,10 @@ public class GrassFieldTest {
         assertFalse(map.objectAt(new Vector2d(2, 11)) instanceof Animal);
 
 
-        map = new GrassField(115);
-        animal1 = new Animal(map, new Vector2d(9, 11));
+        map = new GrassField(115, boundary);
+        animal1 = new Animal(map, new Vector2d(9, 11), boundary);
         map.place(animal1);
-        animal2 = new Animal(map, new Vector2d(8, 2));
+        animal2 = new Animal(map, new Vector2d(8, 2), boundary);
         map.place(animal2);
 
         assertEquals((Animal) map.objectAt(new Vector2d(9, 11)), animal1);

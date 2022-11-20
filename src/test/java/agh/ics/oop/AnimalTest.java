@@ -9,8 +9,8 @@ public class AnimalTest {
 
     @BeforeEach
     void setup(){
-
-        testAnimal = new Animal(new RectangularMap(5, 5), new Vector2d(2, 2));
+        MapBoundary boundary = new MapBoundary();
+        testAnimal = new Animal(new RectangularMap(5, 5, boundary), new Vector2d(2, 2), boundary);
     }
 
     @Test

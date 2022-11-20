@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Animal extends AbstractWorldMapElement {
     private MapDirection direction = MapDirection.NORTH;
     private final IWorldMap map;
+    private final MapBoundary boundary;
     private final ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
-    public Animal(IWorldMap map){
-        this.map = map;
-    }
 
-    public Animal(IWorldMap map, Vector2d initialPosition){
+    public Animal(IWorldMap map, Vector2d initialPosition, MapBoundary boundary){
         this.map = map;
+        this.boundary = boundary;
         addObserver((IPositionChangeObserver) map);
+        addObserver(boundary);
         this.position = initialPosition;
     }
 
@@ -39,6 +39,7 @@ public class Animal extends AbstractWorldMapElement {
 
     public void move(MoveDirection newDirection){
         Vector2d newPosition = this.position;
+        Vector2d oldPosition = this.position;
 
         switch (newDirection) {
             case LEFT -> this.direction = this.direction.previous();
@@ -48,8 +49,8 @@ public class Animal extends AbstractWorldMapElement {
         }
 
         if (newPosition != this.position && map.canMoveTo(newPosition)){
-            this.positionChanged(this.position, newPosition);
             this.position = newPosition;
+            this.positionChanged(oldPosition, newPosition);
         }
     }
 
