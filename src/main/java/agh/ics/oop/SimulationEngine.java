@@ -19,11 +19,9 @@ public class SimulationEngine implements IEngine{
     }
 
     private void createAnimal(Vector2d position){
-        if (map.canMoveTo(position)){
-            Animal newAnimal = new Animal(map, position);
-            animalsList.add(newAnimal);
-            map.place(newAnimal);
-        }
+        Animal newAnimal = new Animal(map, position);
+        animalsList.add(newAnimal);
+        map.place(newAnimal);
     }
 
     @Override

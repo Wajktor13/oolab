@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.oop.SimulationEngineTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-11-17T11:17:31" hostname="DESKTOP-GL64FRM" time="0.049">
+<testsuite name="agh.ics.oop.SimulationEngineTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-11-20T13:40:10" hostname="DESKTOP-HHSEM5B" time="0.029">
   <properties/>
-  <testcase name="rectangularMapCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.029"/>
-  <testcase name="grassFieldCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.006"/>
-  <testcase name="rectangularMapMovingAnimals1()" classname="agh.ics.oop.SimulationEngineTest" time="0.002"/>
-  <testcase name="rectangularMapMovingAnimals2()" classname="agh.ics.oop.SimulationEngineTest" time="0.004"/>
+  <testcase name="rectangularMapMovingAnimalsIllegalPosition()" classname="agh.ics.oop.SimulationEngineTest" time="0.019"/>
+  <testcase name="grassFieldMovingAnimalsIllegalPosition()" classname="agh.ics.oop.SimulationEngineTest" time="0.002"/>
+  <testcase name="rectangularMapCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
+  <testcase name="grassFieldCreatingAndPlacingAnimals()" classname="agh.ics.oop.SimulationEngineTest" time="0.002"/>
+  <testcase name="rectangularMapMovingAnimals1()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
+  <testcase name="rectangularMapMovingAnimals2()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
   <testcase name="grassFieldMovingAnimals1()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
   <testcase name="grassFieldMovingAnimals2()" classname="agh.ics.oop.SimulationEngineTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

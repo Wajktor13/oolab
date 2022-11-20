@@ -46,11 +46,11 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     }
 
     @Override
-    public boolean place(Animal animal){
+    public boolean place(Animal animal) throws IllegalArgumentException{
         Vector2d position = animal.getPosition();
         if (!canMoveTo(position)){
 
-            return false;
+            throw new IllegalArgumentException(String.format("'%s' is either invalid or occupied", position));
         }
         else {
             animalsHashMap.put(animal.position, animal);

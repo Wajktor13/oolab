@@ -1,20 +1,11 @@
 package agh.ics.oop;
 
-public class OptionsParser {
+public class OptionsParser{
 
-    public MoveDirection[] parse(String[] commands) {
+    public MoveDirection[] parse(String[] commands) throws IllegalArgumentException{
         int n = commands.length;
-        int countUndefined = 0;
         int i = 0;
-
-        for (String str : commands) {
-            switch (str) {
-                case "forward", "f", "backward", "b", "right", "r", "left", "l" -> {}
-                default -> countUndefined++;
-            }
-        }
-
-        MoveDirection[] convertedCommands = new MoveDirection[n - countUndefined];
+        MoveDirection[] convertedCommands = new MoveDirection[n];
 
         for (String command : commands) {
             switch (command) {
@@ -22,6 +13,8 @@ public class OptionsParser {
                 case "backward", "b" -> convertedCommands[i++] = MoveDirection.BACKWARD;
                 case "right", "r" -> convertedCommands[i++] = MoveDirection.RIGHT;
                 case "left", "l" -> convertedCommands[i++] = MoveDirection.LEFT;
+                default -> throw new IllegalArgumentException(String.format("'%s' is not a legal move command",
+                                                                            command));
             }
         }
 
