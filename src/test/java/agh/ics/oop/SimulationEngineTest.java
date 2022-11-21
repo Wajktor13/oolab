@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.*;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -53,8 +56,8 @@ public class SimulationEngineTest {
     @Test
     void rectangularMapMovingAnimals2(){
         OptionsParser op = new OptionsParser();
-        MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
-                                                      "f", "f", "f", "f", "f"});
+        MoveDirection[] moves = op.parse(List.of("f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
+                "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         RectangularMap map = new RectangularMap(10, 5, boundary);
         SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
@@ -81,8 +84,8 @@ public class SimulationEngineTest {
     @Test
     void rectangularMapMovingAnimalsIllegalPosition(){
         OptionsParser op = new OptionsParser();
-        MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
-                "f", "f", "f", "f", "f"});
+        MoveDirection[] moves = op.parse(List.of("f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
+                "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(2, 3), new Vector2d(2, 2)};
         RectangularMap map = new RectangularMap(10, 5, boundary);
 
@@ -120,8 +123,8 @@ public class SimulationEngineTest {
     @Test
     void grassFieldMovingAnimals2(){
         OptionsParser op = new OptionsParser();
-        MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
-                "f", "f", "f", "f", "f"});
+        MoveDirection[] moves = op.parse(List.of("f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
+                "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         GrassField map = new GrassField(19, boundary);
         SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
@@ -138,8 +141,8 @@ public class SimulationEngineTest {
     @Test
     void grassFieldMovingAnimalsIllegalPosition(){
         OptionsParser op = new OptionsParser();
-        MoveDirection[] moves = op.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
-                "f", "f", "f", "f", "f"});
+        MoveDirection[] moves = op.parse(List.of("f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f",
+                "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(2, 3), new Vector2d(2, 2)};
         GrassField map = new GrassField(10, boundary);
 

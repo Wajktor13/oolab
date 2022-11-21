@@ -12,6 +12,12 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
+    public void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition){
+        animalsHashMap.remove(oldPosition);
+        animalsHashMap.put(newPosition, animal);
+    }
+
+    @Override
     protected Vector2d[] findMinOccupiedMapCorners(){
         return new Vector2d[] {boundary.getLowerLeftCorner(), boundary.getUpperRightCorner()};
     }

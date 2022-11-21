@@ -22,8 +22,6 @@ public class SimulationEngine implements IEngine{
     private void createAnimal(Vector2d position){
         Animal newAnimal = new Animal(map, position, boundary);
         animalsList.add(newAnimal);
-        map.place(newAnimal);
-        boundary.addAwme(newAnimal);
     }
 
     @Override

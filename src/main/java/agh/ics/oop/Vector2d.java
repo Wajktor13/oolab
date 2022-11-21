@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.Objects;
 
 public class Vector2d {
-    final int x, y;
+    public final int x, y;
 
     public Vector2d(int x, int y){
         this.x = x;

@@ -13,6 +13,8 @@ public class GrassField extends AbstractWorldMap{
     private final Vector2d animalRightUpperCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
     private final Map<Vector2d, Grass> grassHashMap = new HashMap<>();
     private final MapBoundary boundary;
+    private final ArrayList<Vector2d> freePositions = new ArrayList<Vector2d>();
+
 
     public GrassField(int numberOfGrass, MapBoundary boundary){
         this.numberOfGrass = numberOfGrass;
@@ -20,7 +22,29 @@ public class GrassField extends AbstractWorldMap{
                                                   (int)Math.sqrt(numberOfGrass * 10));
         this.boundary = boundary;
 
+
+        setFreePositions();
         placeGrass();
+    }
+
+    private void setFreePositions(){
+        for (int x = this.grassLeftBottomCorner.x; x <= this.grassRightUpperCorner.x; x++){
+            for (int y = this.grassLeftBottomCorner.y; y <= this.grassRightUpperCorner.y; y++){
+                freePositions.add(new Vector2d(x, y));
+            }
+        }
+    }
+
+    @Override
+    public void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition){
+        if (objectAt(newPosition) instanceof Grass) respawnGrass(newPosition);
+
+        animalsHashMap.remove(oldPosition);
+        animalsHashMap.put(newPosition, animal);
+        if (oldPosition.precedes(grassRightUpperCorner) && oldPosition.follows(grassLeftBottomCorner)){
+            freePositions.add(oldPosition);
+        }
+        freePositions.remove(newPosition);
     }
 
     protected Vector2d[] findMinOccupiedMapCorners(){
@@ -28,25 +52,25 @@ public class GrassField extends AbstractWorldMap{
     }
 
     private void placeGrass(){
-        ArrayList<Vector2d> availablePositions = new ArrayList<Vector2d>();
-
-        for (int x = this.grassLeftBottomCorner.x; x <= this.grassRightUpperCorner.x; x++){
-            for (int y = this.grassLeftBottomCorner.y; y <= this.grassRightUpperCorner.y; y++){
-                availablePositions.add(new Vector2d(x, y));
-            }
-        }
-
-        int n = availablePositions.size();
+        int n = freePositions.size();
 
         for (int i = 0; i < this.numberOfGrass; i++){
             int randomInt = (int) (Math.random() * (n));
-            Vector2d grassPosition = availablePositions.get(randomInt);
+            Vector2d grassPosition = freePositions.get(randomInt);
             grassHashMap.put(grassPosition, new Grass(grassPosition));
-            boundary.addAwme(grassHashMap.get(grassPosition));
-            availablePositions.remove(randomInt);
+            boundary.addVector(grassHashMap.get(grassPosition).position);
+            freePositions.remove(grassPosition);
             n -= 1;
         }
+    }
 
+    private void respawnGrass(Vector2d oldPosition) {
+        grassHashMap.remove(oldPosition);
+        int randomInt = (int) (Math.random() * (freePositions.size()));
+        Vector2d grassPosition = freePositions.get(randomInt);
+        grassHashMap.put(grassPosition, new Grass(grassPosition));
+        boundary.addVector(grassHashMap.get(grassPosition).position);
+        freePositions.remove(grassPosition);
     }
 
     protected boolean isValid(Vector2d position){

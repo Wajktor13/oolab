@@ -1,9 +1,11 @@
 package agh.ics.oop;
 
+import java.util.List;
+
 public class OptionsParser{
 
-    public MoveDirection[] parse(String[] commands) throws IllegalArgumentException{
-        int n = commands.length;
+    public MoveDirection[] parse(List<String> commands) throws IllegalArgumentException{
+        int n = commands.size();
         int i = 0;
         MoveDirection[] convertedCommands = new MoveDirection[n];
 
