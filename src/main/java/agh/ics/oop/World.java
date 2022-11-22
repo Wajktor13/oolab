@@ -8,9 +8,6 @@ import static java.lang.System.out;
 
 
 public class World {
-
-    //        ./gradlew.bat run --args="f b r l f f r r f f f f f f f f"
-
     public static void main(String[] args){
         out.println("system has started\n");
 

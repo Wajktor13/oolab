@@ -8,11 +8,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import static java.lang.System.out;
 
-//./gradlew.bat run --args="f f f f f f r r f f f f f f f f f r f f f f f f f r f l f f f f f f f f f f f f f f f f"
+//./gradlew.bat run --args="f f f f f f r r f f f f f f f f f r f f f f f f f r f l f f f f f f f b f f f f f f f f"
+
 public class App extends Application {
     private final OptionsParser commandParser = new OptionsParser();
     private final MapBoundary boundary = new MapBoundary();
@@ -25,12 +27,9 @@ public class App extends Application {
     public void init(){
         try {
             MoveDirection[] directions = commandParser.parse(getParameters().getRaw());
-            Vector2d[] positions = { new Vector2d(1, 0), new Vector2d(8, 2), new Vector2d(5, 5)};
+            Vector2d[] positions = { new Vector2d(0, 0), new Vector2d(2, 6), new Vector2d(8, 3)};
             this.engine = new SimulationEngine(directions, map, positions, boundary);
-
             engine.run();
-            out.println(boundary.xSet);
-            out.println(map);
 
         } catch (IllegalArgumentException ex) {
             out.println(ex.getMessage());
@@ -43,6 +42,7 @@ public class App extends Application {
         int cols;
 
         GridPane grid = new GridPane();
+        grid.setStyle("-fx-background-color: gray");
 
         Vector2d leftBottomCorner = boundary.getLowerLeftCorner();
         Vector2d rightUpperCorner = boundary.getUpperRightCorner();
@@ -58,12 +58,14 @@ public class App extends Application {
 
         Scene scene = new Scene(grid, cols * (cellSize + borderWidth), rows * (cellSize + borderWidth));
         primaryStage.setScene(scene);
+        primaryStage.setTitle("World");
         primaryStage.show();
     }
 
     private void addGridReference(GridPane grid, int rows, int rowsStart, int cols, int colsStart, float cellSize){
         Label xyLabel = new Label("y\\x");
         xyLabel.setFont(new Font(cellSize / 2));
+        xyLabel.setTextFill(Color.web("white"));
         GridPane.setHalignment(xyLabel, HPos.CENTER);
         grid.add(xyLabel, 0, 0, 1, 1);
 
@@ -71,6 +73,7 @@ public class App extends Application {
         for (int i = 0; i < cols - 1; i++){
             lbl = new Label(String.valueOf(colsStart + i));
             lbl.setFont(new Font(cellSize / 2));
+            lbl.setTextFill(Color.web("white"));
             GridPane.setHalignment(lbl, HPos.CENTER);
             grid.add(lbl, i + 1, 0, 1, 1);
         }
@@ -78,6 +81,7 @@ public class App extends Application {
         for (int i = 0; i < rows - 1; i++){
             lbl = new Label(String.valueOf(rows + rowsStart - 2 - i));
             lbl.setFont(new Font(cellSize / 2));
+            lbl.setTextFill(Color.web("white"));
             GridPane.setHalignment(lbl, HPos.CENTER);
             grid.add(lbl, 0, i + 1, 1, 1);
 
@@ -90,8 +94,9 @@ public class App extends Application {
         for (int i = 0; i < rows - 1; i++){
             for (int j = 0; j < cols - 1; j++){
                 lbl = new Label(stringifyMapElement(map.objectAt(new Vector2d(colsStart + j,
-                                                                              rows + rowsStart - 2 - i))));
+                        rows + rowsStart - 2 - i))));
                 lbl.setFont(new Font(cellSize / 2));
+                lbl.setTextFill(Color.web("white"));
                 GridPane.setHalignment(lbl, HPos.CENTER);
                 grid.add(lbl, j + 1, i + 1, 1, 1);
             }

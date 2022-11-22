@@ -36,8 +36,10 @@ public class RectangularMapTest {
     @Test
     void canMoveToAndPlace(){
         RectangularMap map = new RectangularMap(6, 6, boundary);
-        new Animal(map, new Vector2d(0, 3), boundary);
-        new Animal(map, new Vector2d(4, 1), boundary);
+        Animal animal1 = new Animal(map, new Vector2d(0, 3), boundary);
+        map.place(animal1);
+        Animal animal2 = new Animal(map, new Vector2d(4, 1), boundary);
+        map.place(animal2);
 
         assertTrue(map.canMoveTo(new Vector2d(0, 0)));
         assertTrue(map.canMoveTo(new Vector2d(4, 2)));
@@ -48,8 +50,10 @@ public class RectangularMapTest {
 
 
         map = new RectangularMap(20, 25, boundary);
-        new Animal(map, new Vector2d(15, 8), boundary);
-        new Animal(map, new Vector2d(9, 2), boundary);
+        animal1 = new Animal(map, new Vector2d(15, 8), boundary);
+        map.place(animal1);
+        animal2 = new Animal(map, new Vector2d(9, 2), boundary);
+        map.place(animal2);
 
         assertTrue(map.canMoveTo(new Vector2d(1, 12)));
         assertTrue(map.canMoveTo(new Vector2d(8, 7)));
@@ -62,8 +66,10 @@ public class RectangularMapTest {
     @Test
     void isOccupiedAndPlace(){
         RectangularMap map = new RectangularMap(8, 8, boundary);
-        new Animal(map, new Vector2d(2, 3), boundary);
-        new Animal(map, new Vector2d(4, 4), boundary);
+        Animal animal1 = new Animal(map, new Vector2d(2, 3), boundary);
+        map.place(animal1);
+        Animal animal2 = new Animal(map, new Vector2d(4, 4), boundary);
+        map.place(animal2);
 
         assertTrue(map.isOccupied(new Vector2d(2, 3)));
         assertTrue(map.isOccupied(new Vector2d(4, 4)));
@@ -74,8 +80,10 @@ public class RectangularMapTest {
 
 
         map = new RectangularMap(15, 10, boundary);
-        new Animal(map, new Vector2d(8, 9), boundary);
-        new Animal(map, new Vector2d(1, 7), boundary);
+        animal1 = new Animal(map, new Vector2d(8, 9), boundary);
+        map.place(animal1);
+        animal2 = new Animal(map, new Vector2d(1, 7), boundary);
+        map.place(animal2);
 
         assertTrue(map.isOccupied(new Vector2d(8, 9)));
         assertTrue(map.isOccupied(new Vector2d(1, 7)));
@@ -89,7 +97,9 @@ public class RectangularMapTest {
     void objectAtAndPlace(){
         RectangularMap map = new RectangularMap(3, 3, boundary);
         Animal animal1 = new Animal(map, new Vector2d(1, 1), boundary);
+        map.place(animal1);
         Animal animal2 = new Animal(map, new Vector2d(2, 0), boundary);
+        map.place(animal2);
 
         assertEquals((Animal) map.objectAt(new Vector2d(1, 1)), animal1);
         assertEquals((Animal) map.objectAt(new Vector2d(2, 0)), animal2);
@@ -99,7 +109,9 @@ public class RectangularMapTest {
 
         map = new RectangularMap(10, 15, boundary);
         animal1 = new Animal(map, new Vector2d(9, 11), boundary);
+        map.place(animal1);
         animal2 = new Animal(map, new Vector2d(8, 2), boundary);
+        map.place(animal2);
 
         assertEquals((Animal) map.objectAt(new Vector2d(9, 11)), animal1);
         assertEquals((Animal) map.objectAt(new Vector2d(8, 2)), animal2);

@@ -36,10 +36,10 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition){
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         if (objectAt(newPosition) instanceof Grass) respawnGrass(newPosition);
 
-        animalsHashMap.remove(oldPosition);
+        Animal animal = animalsHashMap.remove(oldPosition);
         animalsHashMap.put(newPosition, animal);
         if (oldPosition.precedes(grassRightUpperCorner) && oldPosition.follows(grassLeftBottomCorner)){
             freePositions.add(oldPosition);

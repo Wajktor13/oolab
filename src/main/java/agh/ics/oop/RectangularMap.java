@@ -12,8 +12,8 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    public void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition){
-        animalsHashMap.remove(oldPosition);
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+        Animal animal = animalsHashMap.remove(oldPosition);
         animalsHashMap.put(newPosition, animal);
     }
 
