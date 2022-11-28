@@ -3,7 +3,8 @@ package agh.ics.oop;
 
 import java.util.ArrayList;
 
-public class Animal extends AbstractWorldMapElement {
+public class Animal implements IMapElement {
+    Vector2d position;
     private MapDirection direction = MapDirection.NORTH;
     private final IWorldMap map;
     private final MapBoundary boundary;
@@ -18,11 +19,11 @@ public class Animal extends AbstractWorldMapElement {
         this.position = initialPosition;
     }
 
-    void addObserver(IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer){
         observers.add(observer);
     }
 
-    void removeObserver(IPositionChangeObserver observer){
+    public void removeObserver(IPositionChangeObserver observer){
         observers.remove(observer);
     }
 
@@ -33,6 +34,16 @@ public class Animal extends AbstractWorldMapElement {
     }
 
     @Override
+    public String getImageUrl() {
+        return switch (direction) {
+            case NORTH -> "src/main/resources/animal_up.png";
+            case SOUTH -> "src/main/resources/animal_down.png";
+            case WEST -> "src/main/resources/animal_left.png";
+            case EAST -> "src/main/resources/animal_right.png";
+        };
+    }
+
+    @Override
     public String toString(){
         return this.direction.toString();
     }
@@ -40,7 +51,6 @@ public class Animal extends AbstractWorldMapElement {
     public void move(MoveDirection newDirection){
         Vector2d newPosition = this.position;
         Vector2d oldPosition = this.position;
-
         switch (newDirection) {
             case LEFT -> this.direction = this.direction.previous();
             case RIGHT -> this.direction = this.direction.next();
@@ -56,5 +66,13 @@ public class Animal extends AbstractWorldMapElement {
 
     public MapDirection getDirection(){
         return this.direction;
+    }
+
+    public Vector2d getPosition(){
+        return this.position;
+    }
+
+    public boolean isAt(Vector2d otherPosition){
+        return this.position.equals(otherPosition);
     }
 }
