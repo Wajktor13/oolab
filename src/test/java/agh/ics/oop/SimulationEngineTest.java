@@ -20,7 +20,7 @@ public class SimulationEngineTest {
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
         RectangularMap map = new RectangularMap(3, 3, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
 
         assertTrue(map.isOccupied(new Vector2d(1, 2)));
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
@@ -38,7 +38,7 @@ public class SimulationEngineTest {
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
         RectangularMap map = new RectangularMap(3, 3, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
 
         engine.run();
 
@@ -60,7 +60,7 @@ public class SimulationEngineTest {
                 "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         RectangularMap map = new RectangularMap(10, 5, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
 
         engine.run();
 
@@ -90,7 +90,7 @@ public class SimulationEngineTest {
         RectangularMap map = new RectangularMap(10, 5, boundary);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
         });
     }
 
@@ -99,7 +99,7 @@ public class SimulationEngineTest {
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 2), new Vector2d(2, 0)};
         GrassField map = new GrassField(303, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 200);
 
         assertTrue(map.isOccupied(new Vector2d(1, 2)));
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
@@ -111,7 +111,7 @@ public class SimulationEngineTest {
         MoveDirection[] moves = {MoveDirection.RIGHT, MoveDirection.BACKWARD, MoveDirection.FORWARD};
         Vector2d[] initialPositions = {new Vector2d(1, 2), new Vector2d(2, 1), new Vector2d(1, 0)};
         GrassField map = new GrassField(11, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
 
         engine.run();
 
@@ -127,7 +127,7 @@ public class SimulationEngineTest {
                 "f", "f", "f", "f", "f"));
         Vector2d[] initialPositions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         GrassField map = new GrassField(19, boundary);
-        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+        SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
 
         engine.run();
 
@@ -147,7 +147,7 @@ public class SimulationEngineTest {
         GrassField map = new GrassField(10, boundary);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary);
+            SimulationEngine engine = new SimulationEngine(moves, map, initialPositions, boundary, 100);
         });
     }
 }

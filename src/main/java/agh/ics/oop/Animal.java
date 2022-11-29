@@ -45,7 +45,7 @@ public class Animal implements IMapElement {
 
     @Override
     public String toString(){
-        return this.direction.toString();
+        return "animal";
     }
 
     public void move(MoveDirection newDirection){

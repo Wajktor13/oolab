@@ -4,4 +4,6 @@ public interface IMapElement {
     public String toString();
 
     public String getImageUrl();
+
+    public Vector2d getPosition();
 }

@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -27,8 +28,8 @@ public class App extends Application implements IPositionChangeObserver{
 
     GridPane grid = new GridPane();
 
-    private final int gridWidth = 1000;
-    private final int gridHeight = 800;
+    private final int gridWidth = 800;
+    private final int gridHeight = 600;
     private final int sceneWidth = gridWidth;
     private final int sceneHeight = gridHeight + 150;
     private final double borderWidth = 0.5;
@@ -51,6 +52,17 @@ public class App extends Application implements IPositionChangeObserver{
 
     @Override
     public void start(Stage primaryStage){
+        grid.setGridLinesVisible(true);
+        BackgroundSize backgroundSize = new BackgroundSize(0.5, 0.5, true, true, true, true);
+        BackgroundImage image = new BackgroundImage(new Image("dirt.png"),
+                BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT
+        );
+//        grid.setStyle("-fx-background-image: url(dirt.png)");
+        grid.setBackground(new Background(image));
+
         TextField movesInput = new TextField();
         movesInput.setPrefWidth(Math.floor(this.sceneWidth / 2));
         movesInput.setPromptText("");
@@ -79,6 +91,7 @@ public class App extends Application implements IPositionChangeObserver{
         renderMap();
 
         Scene scene = new Scene(vBox, sceneWidth, sceneHeight);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("World");
         primaryStage.show();
@@ -116,7 +129,7 @@ public class App extends Application implements IPositionChangeObserver{
         rows = (rightUpperCorner.subtract(leftBottomCorner)).y + 2;
         cols = (rightUpperCorner.subtract(leftBottomCorner)).x + 2;
         cellSize = (int) Math.floor(Math.min(calculateCellSize(gridWidth, cols), calculateCellSize(gridHeight, rows)));
-        grid.setGridLinesVisible(true);
+
 
         for (int i = 0; i < cols; i++) grid.getColumnConstraints().add(new ColumnConstraints(cellSize));
         for (int i = 0; i < rows; i++) grid.getRowConstraints().add(new RowConstraints(cellSize));
@@ -161,20 +174,14 @@ public class App extends Application implements IPositionChangeObserver{
 
         for (int i = 0; i < rows - 1; i++){
             for (int j = 0; j < cols - 1; j++){
-                box = new GuiElementBox((int) ((int) cellSize - Math.round(borderWidth * 2)),
-                        wrapUrl(map.objectAt(new Vector2d(colsStart + j,
-                        rows + rowsStart - 2 - i)))).getBox();
-                GridPane.setHalignment(box, HPos.CENTER);
-                grid.add(box, j + 1, i + 1, 1, 1);
+                Object element = map.objectAt(new Vector2d(colsStart + j, rows + rowsStart - 2 - i));
+                if (element != null){
+                    box = new GuiElementBox((int) ((int) cellSize - Math.round(borderWidth * 2)),
+                            (IMapElement) element).getBox();
+                    GridPane.setHalignment(box, HPos.CENTER);
+                    grid.add(box, j + 1, i + 1, 1, 1);
+                }
             }
-        }
-    }
-
-    private String wrapUrl(Object MapElement){
-        if (MapElement == null){
-            return "src/main/resources/dirt.png";
-        } else {
-            return ((IMapElement) MapElement).getImageUrl();
         }
     }
 }
