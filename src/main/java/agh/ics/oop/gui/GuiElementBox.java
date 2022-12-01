@@ -8,9 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 
 public class GuiElementBox {
     private final VBox box = new VBox();
@@ -42,6 +42,6 @@ public class GuiElementBox {
     }
 
     public VBox getBox(){
-        return box;
+        return this.box;
     }
 }

@@ -19,11 +19,11 @@ public class RectangularMap extends AbstractWorldMap{
 
     @Override
     protected Vector2d[] findMinOccupiedMapCorners(){
-        return new Vector2d[] {boundary.getLowerLeftCorner(), boundary.getUpperRightCorner()};
+        return new Vector2d[] {this.boundary.getLowerLeftCorner(), this.boundary.getUpperRightCorner()};
     }
 
     public boolean isValid(Vector2d position){
-        return leftBottomCorner.precedes(position) && rightUpperCorner.follows(position);
+        return this.leftBottomCorner.precedes(position) && this.rightUpperCorner.follows(position);
     }
 
     @Override

@@ -30,29 +30,29 @@ public class MapBoundary implements IPositionChangeObserver{
     }
 
     public void addVector(Vector2d v){
-        xSet.add(v);
-        ySet.add(v);
+        this.xSet.add(v);
+        this.ySet.add(v);
     }
 
     public void removeVector(Vector2d v){
-        xSet.remove(v);
-        ySet.remove(v);
+        this.xSet.remove(v);
+        this.ySet.remove(v);
     }
 
     public Vector2d getLowerLeftCorner() {
-        if (xSet.isEmpty()){
+        if (this.xSet.isEmpty()){
             return new Vector2d(0, 0);
         } else {
-            return new Vector2d(xSet.first().x, ySet.first().y);
+            return new Vector2d(this.xSet.first().x, this.ySet.first().y);
         }
 
     }
 
     public Vector2d getUpperRightCorner() {
-        if (xSet.isEmpty()){
+        if (this.xSet.isEmpty()){
             return new Vector2d(0, 0);
         } else {
-            return new Vector2d(xSet.last().x, ySet.last().y);
+            return new Vector2d(this.xSet.last().x, this.ySet.last().y);
         }
     }
 }

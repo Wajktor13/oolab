@@ -1,9 +1,9 @@
 package agh.ics.oop;
 
 public interface IMapElement {
-    public String toString();
+    String toString();
 
-    public String getImageUrl();
+    String getImageUrl();
 
-    public Vector2d getPosition();
+    Vector2d getPosition();
 }

@@ -4,31 +4,29 @@ package agh.ics.oop;
 import java.util.ArrayList;
 
 public class Animal implements IMapElement {
-    Vector2d position;
+    protected Vector2d position;
     private MapDirection direction = MapDirection.NORTH;
     private final IWorldMap map;
-    private final MapBoundary boundary;
     private final ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
 
     public Animal(IWorldMap map, Vector2d initialPosition, MapBoundary boundary){
         this.map = map;
-        this.boundary = boundary;
         addObserver((IPositionChangeObserver) map);
         addObserver(boundary);
         this.position = initialPosition;
     }
 
     public void addObserver(IPositionChangeObserver observer){
-        observers.add(observer);
+        this.observers.add(observer);
     }
 
     public void removeObserver(IPositionChangeObserver observer){
-        observers.remove(observer);
+        this.observers.remove(observer);
     }
 
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
-        for (IPositionChangeObserver observer : observers){
+        for (IPositionChangeObserver observer : this.observers){
             observer.positionChanged(oldPosition, newPosition);
         }
     }
@@ -48,17 +46,19 @@ public class Animal implements IMapElement {
         return "animal";
     }
 
-    public void move(MoveDirection newDirection){
+    public void move(MoveDirection moveDirection){
         Vector2d newPosition = this.position;
         Vector2d oldPosition = this.position;
-        switch (newDirection) {
+        MapDirection oldDirection = this.direction;
+
+        switch (moveDirection) {
             case LEFT -> this.direction = this.direction.previous();
             case RIGHT -> this.direction = this.direction.next();
-            case FORWARD -> newPosition = this.position.add(direction.toUnitVector());
-            case BACKWARD -> newPosition = this.position.subtract(direction.toUnitVector());
+            case FORWARD -> newPosition = this.position.add(this.direction.toUnitVector());
+            case BACKWARD -> newPosition = this.position.subtract(this.direction.toUnitVector());
         }
 
-        if (newPosition != this.position && map.canMoveTo(newPosition)){
+        if ((newPosition != this.position && this.map.canMoveTo(newPosition)) || oldDirection != this.direction){
             this.position = newPosition;
             this.positionChanged(oldPosition, newPosition);
         }

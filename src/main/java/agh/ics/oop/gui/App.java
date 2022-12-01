@@ -30,17 +30,17 @@ public class App extends Application implements IPositionChangeObserver{
 
     private final int gridWidth = 800;
     private final int gridHeight = 600;
-    private final int sceneWidth = gridWidth;
-    private final int sceneHeight = gridHeight + 150;
+    private final int sceneWidth = this.gridWidth;
+    private final int sceneHeight = this.gridHeight + 150;
     private final double borderWidth = 0.5;
     private final int moveDelay = 250;
 
     @Override
     public void init(){
         try {
-            MoveDirection[] directions = commandParser.parse(getParameters().getRaw());
+            MoveDirection[] directions = this.commandParser.parse(getParameters().getRaw());
             Vector2d[] positions = { new Vector2d(0, 0), new Vector2d(2, 6), new Vector2d(8, 3)};
-            this.engine = new SimulationEngine(directions, map, positions, boundary, moveDelay);
+            this.engine = new SimulationEngine(directions, this.map, positions, this.boundary, this.moveDelay);
             for (Animal animal : this.engine.getAnimalsList()){
                 animal.addObserver(this);
             }
@@ -61,7 +61,7 @@ public class App extends Application implements IPositionChangeObserver{
                 BackgroundSize.DEFAULT
         );
 //        grid.setStyle("-fx-background-image: url(dirt.png)");
-        grid.setBackground(new Background(image));
+        this.grid.setBackground(new Background(image));
 
         TextField movesInput = new TextField();
         movesInput.setPrefWidth(Math.floor(this.sceneWidth / 2));
@@ -71,9 +71,9 @@ public class App extends Application implements IPositionChangeObserver{
         Button startButton = new Button("START");
         startButton.setOnAction(action -> {
             String[] args = movesInput.getText().split(" ");
-            MoveDirection[] directions = commandParser.parse(Arrays.stream(args).toList());
+            MoveDirection[] directions = this.commandParser.parse(Arrays.stream(args).toList());
             this.engine.setMoves(directions);
-            Thread engineThread = new Thread(engine);
+            Thread engineThread = new Thread(this.engine);
             engineThread.start();
         });
 
@@ -90,7 +90,7 @@ public class App extends Application implements IPositionChangeObserver{
 
         renderMap();
 
-        Scene scene = new Scene(vBox, sceneWidth, sceneHeight);
+        Scene scene = new Scene(vBox, this.sceneWidth, this.sceneHeight);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("World");
@@ -103,17 +103,17 @@ public class App extends Application implements IPositionChangeObserver{
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         Platform.runLater(() -> {
 
-            while(grid.getRowConstraints().size() > 0){
-                grid.getRowConstraints().remove(0);
+            while(this.grid.getRowConstraints().size() > 0){
+                this.grid.getRowConstraints().remove(0);
             }
 
-            while(grid.getColumnConstraints().size() > 0){
-                grid.getColumnConstraints().remove(0);
+            while(this.grid.getColumnConstraints().size() > 0){
+                this.grid.getColumnConstraints().remove(0);
             }
 
-            Node node = grid.getChildren().get(0);
-            grid.getChildren().clear();
-            grid.getChildren().add(0,node);
+            Node node = this.grid.getChildren().get(0);
+            this.grid.getChildren().clear();
+            this.grid.getChildren().add(0,node);
 
             renderMap();
         });
@@ -124,22 +124,23 @@ public class App extends Application implements IPositionChangeObserver{
         int cols;
         int cellSize;
 
-        Vector2d leftBottomCorner = boundary.getLowerLeftCorner();
-        Vector2d rightUpperCorner = boundary.getUpperRightCorner();
+        Vector2d leftBottomCorner = this.boundary.getLowerLeftCorner();
+        Vector2d rightUpperCorner = this.boundary.getUpperRightCorner();
         rows = (rightUpperCorner.subtract(leftBottomCorner)).y + 2;
         cols = (rightUpperCorner.subtract(leftBottomCorner)).x + 2;
-        cellSize = (int) Math.floor(Math.min(calculateCellSize(gridWidth, cols), calculateCellSize(gridHeight, rows)));
+        cellSize = (int) Math.floor(Math.min(calculateCellSize(this.gridWidth, cols),
+                calculateCellSize(this.gridHeight, rows)));
 
 
-        for (int i = 0; i < cols; i++) grid.getColumnConstraints().add(new ColumnConstraints(cellSize));
-        for (int i = 0; i < rows; i++) grid.getRowConstraints().add(new RowConstraints(cellSize));
+        for (int i = 0; i < cols; i++) this.grid.getColumnConstraints().add(new ColumnConstraints(cellSize));
+        for (int i = 0; i < rows; i++) this.grid.getRowConstraints().add(new RowConstraints(cellSize));
 
         addGridReference(rows, leftBottomCorner.y, cols, leftBottomCorner.x, cellSize);
         addMapObjects(rows, leftBottomCorner.y, cols, leftBottomCorner.x, cellSize);
     }
 
     private double calculateCellSize(int availableLength, int numberOfCells){
-        return (availableLength - numberOfCells * borderWidth) / numberOfCells;
+        return (availableLength - numberOfCells * this.borderWidth) / numberOfCells;
     }
 
     private void addGridReference(int rows, int rowsStart, int cols, int colsStart, float cellSize){
@@ -147,7 +148,7 @@ public class App extends Application implements IPositionChangeObserver{
         xyLabel.setFont(new Font(cellSize / 2));
         xyLabel.setTextFill(Color.web("white"));
         GridPane.setHalignment(xyLabel, HPos.CENTER);
-        grid.add(xyLabel, 0, 0, 1, 1);
+        this.grid.add(xyLabel, 0, 0, 1, 1);
 
         Label lbl;
         for (int i = 0; i < cols - 1; i++){
@@ -155,7 +156,7 @@ public class App extends Application implements IPositionChangeObserver{
             lbl.setFont(new Font(cellSize / 2));
             lbl.setTextFill(Color.web("white"));
             GridPane.setHalignment(lbl, HPos.CENTER);
-            grid.add(lbl, i + 1, 0, 1, 1);
+            this.grid.add(lbl, i + 1, 0, 1, 1);
         }
 
         for (int i = 0; i < rows - 1; i++){
@@ -163,7 +164,7 @@ public class App extends Application implements IPositionChangeObserver{
             lbl.setFont(new Font(cellSize / 2));
             lbl.setTextFill(Color.web("white"));
             GridPane.setHalignment(lbl, HPos.CENTER);
-            grid.add(lbl, 0, i + 1, 1, 1);
+            this.grid.add(lbl, 0, i + 1, 1, 1);
 
         }
     }
@@ -174,12 +175,12 @@ public class App extends Application implements IPositionChangeObserver{
 
         for (int i = 0; i < rows - 1; i++){
             for (int j = 0; j < cols - 1; j++){
-                Object element = map.objectAt(new Vector2d(colsStart + j, rows + rowsStart - 2 - i));
+                Object element = this.map.objectAt(new Vector2d(colsStart + j, rows + rowsStart - 2 - i));
                 if (element != null){
-                    box = new GuiElementBox((int) ((int) cellSize - Math.round(borderWidth * 2)),
+                    box = new GuiElementBox((int) ((int) cellSize - Math.round(this.borderWidth * 2)),
                             (IMapElement) element).getBox();
                     GridPane.setHalignment(box, HPos.CENTER);
-                    grid.add(box, j + 1, i + 1, 1, 1);
+                    this.grid.add(box, j + 1, i + 1, 1, 1);
                 }
             }
         }

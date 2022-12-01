@@ -23,19 +23,19 @@ public class SimulationEngine implements IEngine, Runnable{
     }
 
     private void createAnimal(Vector2d position){
-        Animal newAnimal = new Animal(map, position, boundary);
-        animalsList.add(newAnimal);
-        map.place(newAnimal);
+        Animal newAnimal = new Animal(this.map, position, this.boundary);
+        this.animalsList.add(newAnimal);
+        this.map.place(newAnimal);
         newAnimal.positionChanged(newAnimal.position, newAnimal.position);
     }
 
     @Override
     public void run(){
-        int movesLength = moves.length;
-        int animalListLength = animalsList.size();
+        int movesLength = this.moves.length;
+        int animalListLength = this.animalsList.size();
 
         for (int i = 0; i < movesLength; i++){
-            animalsList.get(i % animalListLength).move(moves[i]);
+            this.animalsList.get(i % animalListLength).move(this.moves[i]);
             try {
                 Thread.sleep(this.moveDelay);
             } catch (InterruptedException err){

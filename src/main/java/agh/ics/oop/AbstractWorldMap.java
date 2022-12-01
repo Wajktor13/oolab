@@ -48,7 +48,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
             throw new IllegalArgumentException(String.format("'%s' is either invalid or occupied", position));
         }
         else {
-            animalsHashMap.put(animal.position, animal);
+            this.animalsHashMap.put(animal.position, animal);
 
             return true;
         }
