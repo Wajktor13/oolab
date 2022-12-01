@@ -14,8 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import java.util.Arrays;
-
-import static java.lang.System.console;
 import static java.lang.System.out;
 
 //./gradlew.bat run --args="f f f f f f r r f f f f f f f f f r f f f f f f f r f l f f f f f f f b f f f f f f f f"
@@ -53,20 +51,19 @@ public class App extends Application implements IPositionChangeObserver{
     @Override
     public void start(Stage primaryStage){
         grid.setGridLinesVisible(true);
-        BackgroundSize backgroundSize = new BackgroundSize(0.5, 0.5, true, true, true, true);
         BackgroundImage image = new BackgroundImage(new Image("dirt.png"),
                 BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER,
                 BackgroundSize.DEFAULT
         );
-//        grid.setStyle("-fx-background-image: url(dirt.png)");
+        grid.setMaxHeight(0); grid.setMaxWidth(0);
         this.grid.setBackground(new Background(image));
+
 
         TextField movesInput = new TextField();
         movesInput.setPrefWidth(Math.floor(this.sceneWidth / 2));
         movesInput.setPromptText("");
-
 
         Button startButton = new Button("START");
         startButton.setOnAction(action -> {
@@ -170,7 +167,6 @@ public class App extends Application implements IPositionChangeObserver{
     }
 
     private void addMapObjects(int rows, int rowsStart, int cols, int colsStart, float cellSize){
-
         VBox box;
 
         for (int i = 0; i < rows - 1; i++){
